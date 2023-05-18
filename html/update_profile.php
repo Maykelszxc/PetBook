@@ -60,15 +60,15 @@ $profile = $result["profile_picture_name"]
             
          </div>
          <div class="inputBox">
-            <input type="hidden" name="old_pass">
+            <input type="hidden" id="old_pass" name="old_pass" >
             <span>Old password :</span>
-            <input type="password" name="update_pass" placeholder="enter previous password" class="box">
+            <input type="password" name="update_pass" id="update_pass" placeholder="enter previous password" class="box" value>
 
             <span>New password :</span>
-            <input type="password" name="new_pass" placeholder="enter new password" class="box">
+            <input type="password" name="new_pass" id="new_pass" placeholder="enter new password" class="box">
 
             <span>Confirm password :</span>
-            <input type="password" name="confirm_pass" placeholder="confirm new password" class="box">
+            <input type="password" name="confirm_pass" id="confirm_pass" placeholder="confirm new password" class="box">
          </div>
       </div>
 

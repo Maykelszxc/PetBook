@@ -28,6 +28,7 @@ if (isset($_POST['submit'])) {
 
     $result = $dbconn->query($user_id);
 
+
     $username = $_POST["update_name"];
     $name = $_POST["update_name"];
 
@@ -39,17 +40,40 @@ if (isset($_POST['submit'])) {
     
     $id = $result->fetch_assoc();
 
+    if(empty($_POST["update_image"])){
+        $newProfileName = $id["profile_picture_name"];
+    }
+
     $sql = "UPDATE account_tb set username='" . $_POST["update_username"]. "', email_address='" . $_POST['update_email'] . "', profile_picture_name='" . $newProfileName. "', name='". $name ."', cover_photo='". $newCoverName ."' WHERE user_id='" . $UID . "'";
     $publicSQL = "UPDATE posts set handlebar='" . $_POST["update_username"]. "', public_profile_picture='" . $newProfileName. "', public_name='". $name ."' WHERE user_id='" . $UID . "'";
 
    if (mysqli_query($dbconn, $sql)){
-    mysqli_query($dbconn, $publicSQL);
+    mysqli_query($dbconn, $publicSQL);}
     
 
     $dp = move_uploaded_file($image_data,$folder.$newProfileName);
     $cp = move_uploaded_file($cover_data,$coverFolder.$newCoverName);
-    header("location:profile.php");
-   }
+    
+if($_POST["update_pass"]){
+        if (password_verify($_POST["update_pass"],$id["password"])){
+
+
+
+            if(($_POST["new_pass"]==$_POST["confirm_pass"])){
+                $passwords = password_hash($_POST["new_pass"], PASSWORD_DEFAULT);
+                $passwordUpdateSQL =  "UPDATE account_tb set password='" . $passwords. "' WHERE user_id='" . $UID . "'";
+                mysqli_query($dbconn,$passwordUpdateSQL);
+
+                header("location:profile.php");
+            }
+            }
+
+        }
+        header("location:profile.php");
+    
+
+
+   
 
    
 }
