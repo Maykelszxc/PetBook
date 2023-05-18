@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500;600;700;800;900&display=swap');
+
+
+:root{
+    --white-color: #fff;
+    --light-color: #f0eef6;
+    --black-color: #151221;
+    --gray-color: #9e98b3;
+    --dark-color: #241e38;
+    --primary-color: #6b4ce6;
+    --secondary-color: #d6ccff;
+    --green-color: #51fb51;
+    --red-color: #fb5151;
+
+    --border-radius: 2rem;
+    --card-border-radius: 1rem;
+    --btn-padding: 0.6rem 2rem;
+    --search-padding: 0.6rem 1rem;
+    --card-padding: 1rem;
+
+    --sticky-top-left: 5.4rem;
+    --sticky-top-right: -18rem;
+}
+
+*, 
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    border: none;
+}
+
+body{
+    font-family: "Poppins", sans-serif;
+    color: var(--dark-color);
+    background: var(--light-color);
+    overflow-x: hidden
+}
+
+/*---- GENERAL----*/
+
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.profile-picture{
+    width: 2.7rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.logo img{
+    width: 40px;
+    margin-right: 15px;
+    display: inline-block;
+}
+
+img{
+    display: block;
+    width: 100%;
+}
+
+.btn{
+    display: inline-block;
+    padding: var(--btn-padding);
+    font-weight: 500;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 300ms ease;
+    font-size: 0.9rem;
+}
+
+.btn:hover{
+    opacity: 0.8;
+}
+
+.btn-primary{
+    background: var(--primary-color);
+    color: var(--white-color);
+}
+
+.text-muted{
+    color: var(--gray-color);
+}
+
+.text-bold{
+    font-weight: 500;
+}
+
+/*---- NAVBAR ----*/
+
+nav{
+    width: 100%;
+    background: var(--white-color);
+    padding: 0.7rem 0;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+
+nav .container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-box{
+    background: var(--light-color);
+    border-radius: var(--border-radius);
+    padding: var(--search-padding);
+}
+
+.search-box input[type="search"]{
+    background: transparent;
+    width: 30vw;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    color: var(--dark-color);
+}
+
+nav .search-box input[type="search"]::placeholder{
+    color: var(--gray-color);
+}
+
+nav .create{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+
+/*---------profile-page---------*/
+
+.profile-main{
+    flex-basis: 73%;
+}
+
+.profile-sidebar{
+    flex-basis: 25%;
+    align-self: flex-start;
+    position: sticky;
+    top: 73%;
+    
+}
+
+.profile-container{
+    background: #f6f6f6;
+    
+    
+}
+.profile-container-inner{
+    padding: 0 4% 10px;
+    
+    
+}
+.profile-pic{
+    width: 200px;
+    border-radius: 50%;
+    margin-top: -75;
+    padding: 5px;
+    background: #ffffffcb;  
+}
+
+.profile-container h1{
+    font-size: 28px;
+    font-weight: 600;
+    color: #222;    
+}
+
+.profile-container b{
+    font-weight: 500;
+}
+
+.profile-container p{
+    margin-top: 5px;
+    
+}
+.profile-container p a{
+    color: #045be6;
+    font-weight: 500;
+    
+}
+.mutual-connection{
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    
+}
+.mutual-connection img{
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.profile-btn{
+    margin: 20px 0;
+   
+}
+.profile-btn a{
+    display: inline-flex;
+    align-items: center;
+    background: #e4e6eb;
+    padding: 6px 15px;
+    border-radius: 4px;
+    margin-right: 10px;
+   
+}
+.profile-btn a img{
+    width: 18px;
+    margin-right: 5px;
+    
+}
+.profile-btn .primary-btn{
+    background: #045be6;
+    color: #fff;
+    
+    
+}
+
+.profile-description{
+    background: #fff;
+    padding: 20px 4% 30px;
+    margin: 12px 0;
+    
+}
+.profile-description h2{
+    color: #333;
+    margin: 10px 0 20px;
+    font-weight: 600;
+    
+}
+.see-more-link{
+    display: block;
+    text-align: right;
+    font-size: 15px;
+}
+.profile-desc-row{
+    display: flex;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+.profile-desc-row img{
+    width: 50px;
+    margin-right: 25px;
+    margin-top: 5px;
+}
+.profile-desc-row div{
+    width: 100%;
+}
+.profile-desc-row h3{
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+.profile-desc-row b{
+    display: block;
+    font-weight: 500;
+    font-size: 15px;
+}
+.profile-desc-row p{
+    margin-top: 15px;
+}
+.profile-desc-row hr{
+    border: 0;
+    border-bottom: 1px solid #999;
+    margin-top: 10px;
+}
+
+
+
+.container .feeds .feed{
+    background: var(--white-color);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.container .feed .head{
+    display: flex;
+    justify-content: space-between;
+}
+
+.container .feed .user{
+    display: flex;
+    gap: 1rem;
+}
+
+.container .feed .photo {
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+    margin: 0.7rem 0;
+}
+
+.container .feed .action-buttons .btnh1{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4rem;
+    margin: 0.6rem;
+    background: none;
+    
+}
+
+.btnh1 i:hover{
+    cursor: pointer;
+}
+
+.container .feed .action-buttons .comment{
+    background: var(--light-color);
+    border-radius: var(--border-radius);
+    padding: var(--search-padding);
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.container .feed .action-buttons .comment input[type="text"]{
+    background: transparent;
+    color: var(--light-color-lightness);
+}
+
+.container .feed .action-buttons .comment input[type="text"]::placeholder{
+    background: transparent;
+}
+
+.container .feed .action-buttons .btn-comments{
+    display: inline-block;
+    align-items: end;
+}
+
+.btn-comments{
+    background: var(--primary-color);
+    color: var(--white-color);
+    margin-left: 16rem;
+}
+
+
+.container .liked-by{
+    display: flex;
+}
+
+.container .liked-by span{
+    width: 1.4rem;
+    height: 1.4rem;
+    display: block;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--white-color);
+    margin-left: -0.6rem;
+}
+
+.container .liked-by span:first-child{
+    margin: 0;
+}
+
+.container .liked-by p{
+    margin-left: 0.5rem;
+}
+
+@media screen and (max-width: 992px) {
+    nav .search-box{
+        display: none;
+    }
+
+    main .container{
+        grid-template-columns: 0 auto 5rem;
+        gap 0;
+    }
+}
