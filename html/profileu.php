@@ -53,6 +53,7 @@ if (isset($_POST['submit'])) {
 
     $dp = move_uploaded_file($image_data,$folder.$newProfileName);
     $cp = move_uploaded_file($cover_data,$coverFolder.$newCoverName);
+
     
 if($_POST["update_pass"]){
         if (password_verify($_POST["update_pass"],$id["password"])){
@@ -64,13 +65,16 @@ if($_POST["update_pass"]){
                 $passwordUpdateSQL =  "UPDATE account_tb set password='" . $passwords. "' WHERE user_id='" . $UID . "'";
                 mysqli_query($dbconn,$passwordUpdateSQL);
 
-                header("location:profile.php");
+                header("location: profile.php");
+            }else{
+                header("location: update_profile.php");
             }
+            }else{
+                header("location: update_profile.php");
             }
 
         }
-        header("location:profile.php");
-    
+
 
 
    

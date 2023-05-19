@@ -152,7 +152,7 @@ nav .create{
 /*---- MAIN CONTENT ----*/
 
 main{
-    position: relatfileive;
+    position: relative;
     top: 5.4rem;
 }
 
@@ -386,8 +386,7 @@ input[type="file"]{
     background: var(--primary-color);
     color: var(--white-color);
     margin-left: 16rem;
-    display: flex;
-    justify-content: space-between;
+    
 }
 
 
@@ -441,11 +440,15 @@ input[type="file"]{
     padding: var(--search-padding);
     display: flex;
     justify-content: space-between;
+    
 }
 
 .middle .feed .action-buttons .comment input[type="text"]{
     background: transparent;
     color: var(--light-color-lightness);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 .middle .feed .action-buttons .comment input[type="text"]::placeholder{
@@ -453,6 +456,11 @@ input[type="file"]{
 }
 
 .middle .feed .action-buttons .btn-comments{
+    display: flex;
+    justify-content: space-between;
+}
+
+.middle .feed .action-buttons .comment .btn-comments{
     display: flex;
     justify-content: space-between;
 }

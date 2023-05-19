@@ -4,30 +4,30 @@ session_start();
 $UID = $_SESSION["user_id"];
 
 if (isset($_SESSION["user_id"])) {
-    
-    
+
+
     $dbconn = require __DIR__ . "/db.php";
 
 
-    
+
     $sql = "SELECT * FROM account_tb
             WHERE user_id = $UID";
-            
+
     $result = $dbconn->query($sql);
-    
+
     $user = $result->fetch_assoc();
     $name = $user["name"];
-    
+
     $dp = $user["profile_picture_name"];
 
 
         $posts_sql = "SELECT * FROM posts ORDER BY date_created DESC";
-            
+
     $posts_result = $dbconn->query($posts_sql);
 
 
 
-    
+
 
 
 };
@@ -41,10 +41,10 @@ if (isset($_POST["submit"])){
     $extension = explode('.',$image_name);
     $fileActualExt = strtolower(end($extension));
     $newName = uniqid('', true).".".$fileActualExt;
-    
-    
-    
-    
+
+
+
+
     $folder='../img/post_images/';
 
 //post the content to database
@@ -57,7 +57,7 @@ if (isset($_POST["submit"])){
     $postProfile = $publicProfile["profile_picture_name"];
     $userhandle = $publicProfile["username"];
     $newPostSql = "INSERT INTO posts (user_id, public_name, public_profile_picture, post_content,post_image, handlebar) VALUES (?,?,?,?,?,?)";
-    
+
 
     $stmt = $dbconn->stmt_init();
     $stmt->prepare($newPostSql);
@@ -75,7 +75,7 @@ if (isset($_POST["submit"])){
         move_uploaded_file($image_data,$folder.$newName);
     header("location: index.php");
     };
-                      
+
 
                 };
 
@@ -96,9 +96,9 @@ if (! isset($user)){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link rel="shortcut icon" type="x-icon" href="Logo1.png">
-    
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -118,12 +118,8 @@ if (! isset($user)){
                    PetBook
                 </h2>
             </a>
-            
 
-            <div class="search-box">
-                <i class="uil uil-search" ></i>
-                <input type="search" placeholder="Search">
-            </div>
+
 
             <div class="create">
                 <label class="btn btn-primary" for="create-post">Create</label>
@@ -170,12 +166,9 @@ if (! isset($user)){
 
                     <!--NOTIFICATION
                         <a class="menu-item" id="notifications">
-
                         <span><i class="uil uil-bell"><small class="notification-count">5+</small></i></span>
                         <h3>Notifications</h3>
-
                         NOTIFICATION POPUP
-
                         <div class="notification-popup">
                             
                             <div>
@@ -188,8 +181,6 @@ if (! isset($user)){
                                     <small class="text-muted"> 2 DAYS AGO</small>
                                 </div>
                             </div>
-
-
                             <div>
                                 <div class="profile-picture">
                                     <img src="../img/Developers/Developer Pyro.png">
@@ -211,7 +202,6 @@ if (! isset($user)){
                                     <small class="text-muted"> 4 MINS AGO</small>
                                 </div>
                             </div>
-
                             <div>
                                 <div class="profile-picture">
                                     <img src="../img/Developers/Developer AJ.png">
@@ -222,11 +212,8 @@ if (! isset($user)){
                                     <small class="text-muted"> 5 SECONDS AGO</small>
                                 </div>
                             </div>
-
                         </div>
-
                     </a>
-
                     END OF NOTIFICATION POPUP-->
 
                     <a href = "chat/index.php" class="menu-item" id="messages-notifications">
@@ -243,10 +230,8 @@ if (! isset($user)){
                     </a>
 
                     <!--<a class="menu-item">
-
                         <span><i class="uil uil-setting"></i></span>
                         <h3>Settings</h3>
-
                     </a>-->
 
                     <a class="menu-item" href = "logout.php">
@@ -275,7 +260,7 @@ if (! isset($user)){
                         <img src="../img/profile-images/<?=$dp?>">
                         <input type = "text" id ="post_content" name ="post_content" placeholder="Post your pets..." >
                     </div>
-                    
+
                     <div class="create-post-links">
                         <input type="file" id="file" name="image" accept="image/*" required>
                         <label for="file"><i class="uil uil-camera"></i>Photos</label>
@@ -288,13 +273,13 @@ if (! isset($user)){
 
                         <button name = "submit" class="btn btn-primary" type = "submit" id="submit">Post</li>
                     </div>
-                    
+
                 </form>
 
                 <!--NEWS FEEDS-->
-                
+
                 <div class="feeds">
-  
+
                 <div class="feed">
                 <?php while($user = $posts_result->fetch_assoc()):
                     $identifier = $user["public_name"];
@@ -305,7 +290,7 @@ if (! isset($user)){
                     $handlebar = $user["handlebar"];
                     $post_id = $user["post_id"];
                     $adopted = $user["adopted"];?>      
-                    
+
                         <div class="head">
 
                             <div class="user">
@@ -328,7 +313,7 @@ if (! isset($user)){
                             </div>
 
                             <span class="edit">
-                                    
+
                                 <i class="uil uil-ellipsis-h"></i>
 
                             </span>
@@ -350,10 +335,10 @@ if (! isset($user)){
                                 <button  onclick="Toggle1()"id="btnh1" class="btnh1"><i class="fa-solid fa-heart"></i></button>
                                 <button id="btnh1" class="btnh1"><i class="uil uil-comment-dots"></i></button>
                                 <button id="btnh1" class="btnh1"><i class="uil uil-house-user"></i></button>
-                                
+
 
                             </div>
-                            
+
                             <form action="comment.php" method = "post">
                             <div class="comment">
                                 <input type ="hidden" name="post_id" id="post_id" value="<?=$post_id?>">
@@ -379,19 +364,19 @@ if (! isset($user)){
                             <p><b><?=$identifier?></b><?=" ", $post_content?></p>
                         </div>
                         <div class="comments">
-                            
+
                             <?php include "showComment.php";
                             while ($userComment = $queryComments -> fetch_assoc()):
                                 $commenter = $userComment["username"];
                                 $commentContent = $userComment["content"];
-                            
-                            
+
+
                             ?>
                             <p><b><?=$commenter?></b><?=" ", $commentContent?></p>
                             <?php endwhile;?>
-                            
+
                         </div>
-                        
+
 
 
                         <div style="height: 10px; background-color: #EAEFF5; margin-bottom: 12px" ></div>
@@ -479,7 +464,7 @@ if (! isset($user)){
 
                     <!--END OF MESSAGE-->
 
-                    
+
                 </div>
 
                 <!--FRIEND REQUESTS-->
@@ -505,7 +490,7 @@ if (! isset($user)){
                                     69 mutual friends
                                 </p>
 
-                                
+
                             </div>
 
                         </div>
@@ -540,7 +525,7 @@ if (! isset($user)){
                                     13 mutual friends
                                 </p>
 
-                                
+
                             </div>
 
                         </div>
@@ -647,9 +632,3 @@ if (! isset($user)){
 
 </body>
 </html>
-
-<?php 
-
-
-
-
