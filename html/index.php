@@ -1,7 +1,9 @@
 <?php
+$likedPost = false;
 
 session_start();
 $UID = $_SESSION["user_id"];
+
 
 if (isset($_SESSION["user_id"])) {
 
@@ -31,7 +33,7 @@ if (isset($_SESSION["user_id"])) {
 
 
 };
-
+if ($_SERVER["REQUEST_METHOD"] === "POST"){
 
 if (isset($_POST["submit"])){
 //for images
@@ -86,6 +88,20 @@ if (! isset($user)){
     header("location: login.php");
     exit;
 }
+if(isset($_POST["like"])){
+    $likePost = $_POST["post_id_like"];
+
+
+
+    $likeSQL = "UPDATE posts SET likes = likes + 1 WHERE post_id = $likePost";
+
+    
+    
+    mysqli_query($dbconn,$likeSQL);
+    
+}
+}
+
 
 
 ?>
@@ -289,7 +305,8 @@ if (! isset($user)){
                     $post_image = $user["post_image"];
                     $handlebar = $user["handlebar"];
                     $post_id = $user["post_id"];
-                    $adopted = $user["adopted"];?>      
+                    $adopted = $user["adopted"];
+                    $like = $user["likes"];?>      
 
                         <div class="head">
 
@@ -329,12 +346,16 @@ if (! isset($user)){
                         <div class="action-buttons">
                             <div class="interaction-buttons">
                             <?php if($adopted=="yes"):?>
-                                <h3>Adopted</h3>
+                                <h1>Adopted</h1>
                                 <?php endif; ?>
+                                <form action="" method="post">
+                                    <input type="hidden" id="post_id_like" name="post_id_like" value="<?=$post_id?>">
+                                    
+                                <button  type="submit" onclick="Toggle1()"id="like" name="like" class="btnh1"><i class="fa-solid fa-heart"></i><h5 style="margin-left: 20px"><?=$like?> likes</h5></button>
 
-                                <button  onclick="Toggle1()"id="btnh1" class="btnh1"><i class="fa-solid fa-heart"></i></button>
-                                <button id="btnh1" class="btnh1"><i class="uil uil-comment-dots"></i></button>
-                                <button id="btnh1" class="btnh1"><i class="uil uil-house-user"></i></button>
+
+                            </form>
+
 
 
                             </div>
@@ -344,6 +365,7 @@ if (! isset($user)){
                                 <input type ="hidden" name="post_id" id="post_id" value="<?=$post_id?>">
                                 <input id="comment" name ="comment" type="text" class="comment-section" placeholder="Write a comment...">
                                 <button id="submit_comment" name ="submit_comment" class="btn btn-comments" type="submit"><i class="uil uil-message"></i></button>
+
                             </div>
                 </form>
                 <?php 

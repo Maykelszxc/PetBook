@@ -23,7 +23,7 @@
 
           </div>
         </div>
-        <a href="../logout.php" class="logout">Logout</a>
+
       </header>
       <div class="search">
         <span class="text">Select a user to start a chat with</span>
