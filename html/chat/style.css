@@ -1,4 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+:root{
+  --color-primary-hue: 252;
+  --dark-color-ligntness: 17%;
+  --light-color-lightness: 95%;
+  --white-color-lightness: 100%;
+
+  --white-color: hsl(252, 30%, var(--white-color-lightness));
+  --light-color: hsl(252, 30%, var(--light-color-lightness));
+  --gray-color: hsl(var(--color-primary-hue), 15%, 65%);
+  --primary-color: hsl(var(--color-primary-hue), 75%, 60%);
+  --secondary-color: hsl(252, 100%, 90%);
+  --green-color: hsl(120, 95%, 65%);
+  --red-color: hsl(0, 95%, 65%);
+  --dark-color: hsl(252, 30%, var(--dark-color-ligntness));
+  --black-color: hsl(252, 30%, 10%);
+
+  --border-radius: 2rem;
+  --card-border-radius: 1rem;
+  --btn-padding: 0.6rem 2rem;
+  --search-padding: 0.6rem 1rem;
+  --card-padding: 1rem;
+
+  --sticky-top-left: 5.4rem;
+  --sticky-top-right: -18rem;
+}
+
 *{
   margin: 0;
   padding: 0;
@@ -11,7 +38,7 @@ body{
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: #f7f7f7;
+  background: var(--light-color-lightness);
   padding: 0 10px;
 }
 .wrapper{
@@ -30,8 +57,8 @@ body{
 .form header{
   font-size: 25px;
   font-weight: 600;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e6e6e6;
+  padding-bottom: var(--card-padding);
+  border-bottom: var(--border-radius);
 }
 .form form{
   margin: 20px 0;
@@ -121,8 +148,8 @@ body{
 .users-list a{
   display: flex;
   align-items: center;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e6e6e6;
+  padding-bottom: var(--card-padding);
+  border-bottom: var(--border-radius);
   justify-content: space-between;
 }
 .wrapper img{
@@ -138,7 +165,7 @@ body{
   align-items: center;
 }
 :is(.users, .users-list) .content .details{
-  color: #000;
+  color: var(--black-color);
   margin-left: 20px;
 }
 :is(.users, .users-list) .details span{
@@ -147,13 +174,13 @@ body{
 }
 .users header .logout{
   display: block;
-  background: #333;
-  color: #fff;
+  background: var(--primary-color);
+  color: var(--white-color);
   outline: none;
-  border: none;
-  padding: 7px 15px;
+  border: var(--border-radius);
+  padding: var(--card-padding);
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: var(--card-border-radius);
   font-size: 17px;
 }
 .users .search{
@@ -171,10 +198,10 @@ body{
   height: 42px;
   width: calc(100% - 50px);
   font-size: 16px;
-  padding: 0 13px;
+  padding: var(--search-padding);
   border: 1px solid #e6e6e6;
   outline: none;
-  border-radius: 5px 0 0 5px;
+  border-radius: var(--border-radius);
   opacity: 0;
   pointer-events: none;
   transition: all 0.2s ease;
@@ -191,15 +218,15 @@ body{
   font-size: 17px;
   cursor: pointer;
   border: none;
-  background: #fff;
-  color: #333;
+  background: var(--primary-color);
+  color: var(--white-color);
   outline: none;
-  border-radius: 0 5px 5px 0;
+  border-radius: var(--border-radius);
   transition: all 0.2s ease;
 }
 .users .search button.active{
-  background: #333;
-  color: #fff;
+  background: var(--primary-color);
+  color: var(--white-color);
 }
 .search button.active i::before{
   content: '\f00d';
@@ -226,11 +253,11 @@ body{
   width: 40px;
 }
 .users-list a .details p{
-  color: #67676a;
+  color: var(--gray-color);
 }
 .users-list a .status-dot{
   font-size: 12px;
-  color: #468669;
+  color: var(--green-color);
   padding-left: 10px;
 }
 .users-list a .status-dot.offline{
@@ -241,10 +268,10 @@ body{
 .chat-area header{
   display: flex;
   align-items: center;
-  padding: 18px 30px;
+  padding: var(--card-padding);
 }
 .chat-area header .back-icon{
-  color: #333;
+  color: var(--primary-color);
   font-size: 18px;
 }
 .chat-area header img{
@@ -261,8 +288,8 @@ body{
   min-height: 500px;
   max-height: 500px;
   overflow-y: auto;
-  padding: 10px 30px 20px 30px;
-  background: #f7f7f7;
+  padding: var(--card-padding);
+  background: var(--white-color);
   box-shadow: inset 0 32px 32px -32px rgb(0 0 0 / 5%),
               inset 0 -32px 32px -32px rgb(0 0 0 / 5%);
 }
@@ -291,8 +318,8 @@ body{
   max-width: calc(100% - 130px);
 }
 .outgoing .details p{
-  background: #333;
-  color: #fff;
+  background: var(--primary-color);
+  color: var(--white-color);
   border-radius: 18px 18px 0 18px;
 }
 .chat-box .incoming{
@@ -309,12 +336,12 @@ body{
   max-width: calc(100% - 130px);
 }
 .incoming .details p{
-  background: #fff;
-  color: #333;
+  background: var(--secondary-color);
+  color: var(--black-color);
   border-radius: 18px 18px 18px 0;
 }
 .typing-area{
-  padding: 18px 30px;
+  padding: var(--search-padding);
   display: flex;
   justify-content: space-between;
 }
@@ -322,22 +349,22 @@ body{
   height: 45px;
   width: calc(100% - 58px);
   font-size: 16px;
-  padding: 0 13px;
+  padding: var(--search-padding);
   border: 1px solid #e6e6e6;
   outline: none;
-  border-radius: 5px 0 0 5px;
+  border-radius: var(--border-radius);
 }
 .typing-area button{
-  color: #fff;
+  color: var(--white-color);
   width: 55px;
   border: none;
   outline: none;
-  background: #333;
+  background: var(--primary-color);
   font-size: 19px;
   cursor: pointer;
   opacity: 0.7;
   pointer-events: none;
-  border-radius: 0 5px 5px 0;
+  border-radius: var(--border-radius);
   transition: all 0.3s ease;
 }
 .typing-area button.active{

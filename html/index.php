@@ -27,6 +27,11 @@ if (isset($_SESSION["user_id"])) {
 
     $posts_result = $dbconn->query($posts_sql);
 
+    $message_sql = "SELECT * FROM messages WHERE incoming_msg_id=$UID Except
+    SELECT * FROM messages WHERE outgoing_msg_id = $UID ORDER BY msg_id DESC";
+
+    $message_result = $dbconn->query($message_sql);
+
 
 
 
@@ -83,11 +88,7 @@ if (isset($_POST["submit"])){
 
 
 
-if (! isset($user)){
 
-    header("location: login.php");
-    exit;
-}
 if(isset($_POST["like"])){
     $likePost = $_POST["post_id_like"];
 
@@ -100,6 +101,11 @@ if(isset($_POST["like"])){
     mysqli_query($dbconn,$likeSQL);
     
 }
+}
+if (! isset($user)){
+
+    header("location: login.php");
+    exit;
 }
 
 
@@ -443,24 +449,42 @@ if(isset($_POST["like"])){
                     </div>
 
                     <!--MESSAGE-->
+                    <?php while($message = $message_result->fetch_assoc()):
+                    $msg_content = $message["msg"];
+                    $msg_id = $message["msg_id"];
+                    $inc_msg_id = $message["incoming_msg_id"];
+                    $out_msg_id = $message["outgoing_msg_id"];
+
+                                $chatUserSQL = "SELECT name,profile_picture_name FROM account_tb WHERE user_id = $out_msg_id";
+                                $chatUser = $dbconn->query($chatUserSQL);
+                                $chatUserResult = $chatUser->fetch_assoc();
+                                $chatName = $chatUserResult["name"];
+                                $chatProfile = $chatUserResult["profile_picture_name"];
+                            
+                            
+                            ?>
+
+
 
                     <div class="message">
 
                         <div class="profile-picture">
-                            <img src="../img/Developers/Developer Pyro.png">
+                            <img src="../img/profile-images/<?=$chatProfile?>">
                         </div>
 
                         <div class="message-body">
-                            <h5>Pyro Bansuelo</h5>
-                            <p class="text-muted">Pahingi ng pet foods</p>
+                            
+                            <h5><?=$chatName?></h5>
+                            <p class="text-muted"><?=$msg_content?></p>
                         </div>
 
                     </div>
+                    <?php endwhile;?>
 
                     <div class="message">
 
                         <div class="profile-picture">
-                            <img src="../img/Developers/Developer Mayks.png">
+                            <img src="../img/profile-images/<?=$chatProfile?>">
                         </div>
 
                         <div class="message-body">
@@ -489,7 +513,7 @@ if(isset($_POST["like"])){
 
                 </div>
 
-                <!--FRIEND REQUESTS-->
+                <!--FRIEND REQUESTS
 
                 <div class="friend-requests">
 
@@ -569,7 +593,7 @@ if(isset($_POST["like"])){
 
             </div>
 
-            <!-- END OF FRIEND REQUESTS-->
+       END OF FRIEND REQUESTS-->
 
 
             <!-- CUSTOMIZATION OF THEME-->
