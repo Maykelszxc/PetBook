@@ -23,7 +23,7 @@ if (isset($_SESSION["user_id"])) {
     $dp = $user["profile_picture_name"];
 
 
-        $posts_sql = "SELECT * FROM posts ORDER BY date_created DESC";
+        $posts_sql = "SELECT * FROM posts WHERE adopted= '' ORDER BY date_created DESC";
 
     $posts_result = $dbconn->query($posts_sql);
 
@@ -251,7 +251,7 @@ if (! isset($user)){
                         <h3>Theme</h3>
                     </a>
 
-                    <a class="menu-item" href = "logout.php">
+                    <a class="menu-item" href = "adopted.php">
 
                         <span><i class="uil uil-house-user"></i></span>
                         <h3>Adopted</h3>
