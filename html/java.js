@@ -30,6 +30,7 @@ const Bg2 = document.querySelector('.bg-2');
 const Bg3 = document.querySelector('.bg-3');
 
 
+
 /*---- This remove all active class from the menu items ----*/
 
 const changeActiveItem = () => {

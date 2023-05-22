@@ -179,7 +179,7 @@ if (! isset($user)){
 
                 <div class="sidebar">
 
-                    <a class="menu-item active" href="index.php">
+                    <a class="menu-item" href="index.php">
 
                         <span><i class="uil uil-home"></i></span>
                         <h3>Home</h3>

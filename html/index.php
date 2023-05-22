@@ -179,7 +179,7 @@ if (! isset($user)){
 
                 <div class="sidebar">
 
-                    <a class="menu-item active">
+                    <a class="menu-item">
 
                         <span><i class="uil uil-home"></i></span>
                         <h3>Home</h3>
@@ -251,21 +251,15 @@ if (! isset($user)){
                         <h3>Theme</h3>
                     </a>
 
-                    <a class="menu-item" href = "adopted.php">
+                    <a class="menu-item" id="adopt" href = "adopted.php">
 
                         <span><i class="uil uil-house-user"></i></span>
                         <h3>Adopted</h3>
 
                     </a>
 
-                    <!--<a class="menu-item">
-                        <span><i class="uil uil-setting"></i></span>
-                        <h3>Settings</h3>
-                    </a>-->
 
-                    
-
-                    <a class="menu-item" href = "logout.php">
+                    <a class="menu-item"" href = "logout.php">
 
                         <span><i class="uil uil-signout"></i></span>
                         <h3>Logout</h3>
