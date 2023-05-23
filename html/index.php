@@ -2,13 +2,17 @@
 $likedPost = false;
 
 session_start();
+$dbconn = require __DIR__ . "/db.php";
 $UID = $_SESSION["user_id"];
+$sql = "SELECT * FROM account_tb
+WHERE user_id = $UID";
+$result = $dbconn->query($sql);
+$output = $result->fetch_assoc();
+$verification = $output["verification"];
 
 
 if (isset($_SESSION["user_id"])) {
 
-
-    $dbconn = require __DIR__ . "/db.php";
 
 
 
@@ -23,7 +27,7 @@ if (isset($_SESSION["user_id"])) {
     $dp = $user["profile_picture_name"];
 
 
-        $posts_sql = "SELECT * FROM posts WHERE adopted= '' ORDER BY date_created DESC";
+        $posts_sql = "SELECT * FROM posts ORDER BY date_created DESC";
 
     $posts_result = $dbconn->query($posts_sql);
 
@@ -85,6 +89,98 @@ if (isset($_POST["submit"])){
 
 
                 };
+                if (isset($_POST["submit"])){
+//for images
+    $image_file = $_FILES['image'];
+    $image_name = $image_file['name'];
+    $image_data = ($image_file['tmp_name']);
+    $extension = explode('.',$image_name);
+    $fileActualExt = strtolower(end($extension));
+    $newName = uniqid('', true).".".$fileActualExt;
+
+
+
+
+    $folder='../img/post_images/';
+
+//post the content to database
+
+    $dbconn = require __DIR__ . "/db.php";
+    $publicProfileSql = "SELECT * FROM account_tb WHERE user_id = $UID";
+    $publicProfileSqlResult = $dbconn ->query($publicProfileSql);
+    $publicProfile = $publicProfileSqlResult->fetch_assoc();
+    $publicUser = $publicProfile["name"];
+    $postProfile = $publicProfile["profile_picture_name"];
+    $userhandle = $publicProfile["username"];
+    $newPostSql = "INSERT INTO posts (user_id, public_name, public_profile_picture, post_content,post_image, handlebar) VALUES (?,?,?,?,?,?)";
+
+
+    $stmt = $dbconn->stmt_init();
+    $stmt->prepare($newPostSql);
+    $stmt->bind_param("isssss",
+                    $UID,
+                    $publicUser,
+                    $postProfile,
+                    $_POST["post_content"],
+                    $newName,
+                    $userhandle
+                    );
+
+
+    if($stmt->execute()){
+        move_uploaded_file($image_data,$folder.$newName);
+    header("location: index.php");
+    };
+
+
+                };
+if (isset($_POST["update"])){
+//for images
+    $updates = "updates";
+    $image_file = $_FILES['image'];
+    $image_name = $image_file['name'];
+    $image_data = ($image_file['tmp_name']);
+    $extension = explode('.',$image_name);
+    $fileActualExt = strtolower(end($extension));
+    $newName = uniqid('', true).".".$fileActualExt;
+
+
+
+
+    $folder='../img/post_images/';
+
+//post the content to database
+
+    $dbconn = require __DIR__ . "/db.php";
+    $publicProfileSql = "SELECT * FROM account_tb WHERE user_id = $UID";
+    $publicProfileSqlResult = $dbconn ->query($publicProfileSql);
+    $publicProfile = $publicProfileSqlResult->fetch_assoc();
+    $publicUser = $publicProfile["name"];
+    $postProfile = $publicProfile["profile_picture_name"];
+    $userhandle = $publicProfile["username"];
+    $newPostSql = "INSERT INTO posts (user_id, public_name, public_profile_picture, post_content,post_image, handlebar,updates) VALUES (?,?,?,?,?,?,?)";
+
+
+    $stmt = $dbconn->stmt_init();
+    $stmt->prepare($newPostSql);
+    $stmt->bind_param("issssss",
+                    $UID,
+                    $publicUser,
+                    $postProfile,
+                    $_POST["post_content"],
+                    $newName,
+                    $userhandle,
+                    $updates
+                    );
+
+
+    if($stmt->execute()){
+        move_uploaded_file($image_data,$folder.$newName);
+    header("location: index.php");
+    };
+
+
+                };
 
 
 
@@ -107,6 +203,10 @@ if (! isset($user)){
     header("location: login.php");
     exit;
 }
+if($verification == 'verified'){
+    header("location: unverified.php");
+}
+
 
 
 
@@ -257,6 +357,13 @@ if (! isset($user)){
                         <h3>Adopted</h3>
 
                     </a>
+                    <a class="menu-item" id="adopt" href = "updates.php">
+
+                        <span><i class="uil uil-house-user"></i></span>
+                        <h3>Pet Updates</h3>
+
+                    </a>                   
+                    
 
 
                     <a class="menu-item"" href = "logout.php">
@@ -296,6 +403,8 @@ if (! isset($user)){
                         <input type="file" id="file">
                         <label for="file"><i class="uil uil-file-upload-alt"></i>Documents</label>
 
+                        <button name = "update" class="btn" type = "submit" id="submit">Update</li>
+
                         <button name = "submit" class="btn btn-primary" type = "submit" id="submit">Post</li>
                     </div>
 
@@ -315,7 +424,8 @@ if (! isset($user)){
                     $handlebar = $user["handlebar"];
                     $post_id = $user["post_id"];
                     $adopted = $user["adopted"];
-                    $like = $user["likes"];?>      
+                    $like = $user["likes"];
+                    $petUpdate = $user["updates"];?>      
 
                         <div class="head">
 
@@ -356,7 +466,9 @@ if (! isset($user)){
                             <div class="interaction-buttons">
                             <?php if($adopted=="yes"):?>
                                 <h1>Adopted</h1>
-                                <?php endif; ?>
+                                <?php elseif($petUpdate =="updates"): ?>
+                                    <h1>Pet Update</h1>
+                                    <?php endif;?>
                                 <form action="" method="post">
                                     <input type="hidden" id="post_id_like" name="post_id_like" value="<?=$post_id?>">
                                     
